@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedRoutingRouteImport } from './routes/_authenticated/routing'
 import { Route as AuthenticatedRoadsRouteImport } from './routes/_authenticated/roads'
 import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
 import { Route as AuthenticatedFutureRouteImport } from './routes/_authenticated/future'
@@ -30,6 +31,11 @@ const AuthenticatedRoute = AuthenticatedRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedRoutingRoute = AuthenticatedRoutingRouteImport.update({
+  id: '/routing',
+  path: '/routing',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedRoadsRoute = AuthenticatedRoadsRouteImport.update({
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/future': typeof AuthenticatedFutureRoute
   '/map': typeof AuthenticatedMapRoute
   '/roads': typeof AuthenticatedRoadsRoute
+  '/routing': typeof AuthenticatedRoutingRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/future': typeof AuthenticatedFutureRoute
   '/map': typeof AuthenticatedMapRoute
   '/roads': typeof AuthenticatedRoadsRoute
+  '/routing': typeof AuthenticatedRoutingRoute
   '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesById {
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/_authenticated/future': typeof AuthenticatedFutureRoute
   '/_authenticated/map': typeof AuthenticatedMapRoute
   '/_authenticated/roads': typeof AuthenticatedRoadsRoute
+  '/_authenticated/routing': typeof AuthenticatedRoutingRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/future'
     | '/map'
     | '/roads'
+    | '/routing'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/future'
     | '/map'
     | '/roads'
+    | '/routing'
     | '/'
   id:
     | '__root__'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/future'
     | '/_authenticated/map'
     | '/_authenticated/roads'
+    | '/_authenticated/routing'
     | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +156,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/routing': {
+      id: '/_authenticated/routing'
+      path: '/routing'
+      fullPath: '/routing'
+      preLoaderRoute: typeof AuthenticatedRoutingRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/roads': {
@@ -190,6 +209,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedFutureRoute: typeof AuthenticatedFutureRoute
   AuthenticatedMapRoute: typeof AuthenticatedMapRoute
   AuthenticatedRoadsRoute: typeof AuthenticatedRoadsRoute
+  AuthenticatedRoutingRoute: typeof AuthenticatedRoutingRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
@@ -199,6 +219,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedFutureRoute: AuthenticatedFutureRoute,
   AuthenticatedMapRoute: AuthenticatedMapRoute,
   AuthenticatedRoadsRoute: AuthenticatedRoadsRoute,
+  AuthenticatedRoutingRoute: AuthenticatedRoutingRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 
