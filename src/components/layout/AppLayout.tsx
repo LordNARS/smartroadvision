@@ -26,11 +26,11 @@ import { Badge } from "@/components/ui/badge";
 
 const nav = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { to: "/roads", label: "Road Management", icon: RouteIcon },
-  { to: "/complaints", label: "Complaints", icon: MessageSquareWarning },
-  { to: "/map", label: "City Map", icon: Map },
-  { to: "/analytics", label: "Analytics", icon: BarChart3 },
-  { to: "/future", label: "Future Modules", icon: Rocket },
+  { to: "/roads", label: "Road Management", icon: RouteIcon, exact: false },
+  { to: "/complaints", label: "Complaints", icon: MessageSquareWarning, exact: false },
+  { to: "/map", label: "City Map", icon: Map, exact: false },
+  { to: "/analytics", label: "Analytics", icon: BarChart3, exact: false },
+  { to: "/future", label: "Future Modules", icon: Rocket, exact: false },
 ] as const;
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
