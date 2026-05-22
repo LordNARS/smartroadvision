@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedRoadsRouteImport } from './routes/_authenticated/roads'
+import { Route as AuthenticatedComplaintsRouteImport } from './routes/_authenticated/complaints'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -33,14 +34,21 @@ const AuthenticatedRoadsRoute = AuthenticatedRoadsRouteImport.update({
   path: '/roads',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedComplaintsRoute = AuthenticatedComplaintsRouteImport.update({
+  id: '/complaints',
+  path: '/complaints',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
+  '/complaints': typeof AuthenticatedComplaintsRoute
   '/roads': typeof AuthenticatedRoadsRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/complaints': typeof AuthenticatedComplaintsRoute
   '/roads': typeof AuthenticatedRoadsRoute
   '/': typeof AuthenticatedIndexRoute
 }
@@ -48,18 +56,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
+  '/_authenticated/complaints': typeof AuthenticatedComplaintsRoute
   '/_authenticated/roads': typeof AuthenticatedRoadsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/roads'
+  fullPaths: '/' | '/login' | '/complaints' | '/roads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/roads' | '/'
+  to: '/login' | '/complaints' | '/roads' | '/'
   id:
     | '__root__'
     | '/_authenticated'
     | '/login'
+    | '/_authenticated/complaints'
     | '/_authenticated/roads'
     | '/_authenticated/'
   fileRoutesById: FileRoutesById
@@ -99,15 +109,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRoadsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/complaints': {
+      id: '/_authenticated/complaints'
+      path: '/complaints'
+      fullPath: '/complaints'
+      preLoaderRoute: typeof AuthenticatedComplaintsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedComplaintsRoute: typeof AuthenticatedComplaintsRoute
   AuthenticatedRoadsRoute: typeof AuthenticatedRoadsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedComplaintsRoute: AuthenticatedComplaintsRoute,
   AuthenticatedRoadsRoute: AuthenticatedRoadsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
