@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedRoadsRouteImport } from './routes/_authenticated/roads'
 import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
+import { Route as AuthenticatedFutureRouteImport } from './routes/_authenticated/future'
 import { Route as AuthenticatedComplaintsRouteImport } from './routes/_authenticated/complaints'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 
@@ -41,6 +42,11 @@ const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
   path: '/map',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedFutureRoute = AuthenticatedFutureRouteImport.update({
+  id: '/future',
+  path: '/future',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedComplaintsRoute = AuthenticatedComplaintsRouteImport.update({
   id: '/complaints',
   path: '/complaints',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
   '/complaints': typeof AuthenticatedComplaintsRoute
+  '/future': typeof AuthenticatedFutureRoute
   '/map': typeof AuthenticatedMapRoute
   '/roads': typeof AuthenticatedRoadsRoute
 }
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
   '/complaints': typeof AuthenticatedComplaintsRoute
+  '/future': typeof AuthenticatedFutureRoute
   '/map': typeof AuthenticatedMapRoute
   '/roads': typeof AuthenticatedRoadsRoute
   '/': typeof AuthenticatedIndexRoute
@@ -74,21 +82,37 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
   '/_authenticated/complaints': typeof AuthenticatedComplaintsRoute
+  '/_authenticated/future': typeof AuthenticatedFutureRoute
   '/_authenticated/map': typeof AuthenticatedMapRoute
   '/_authenticated/roads': typeof AuthenticatedRoadsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/analytics' | '/complaints' | '/map' | '/roads'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/analytics'
+    | '/complaints'
+    | '/future'
+    | '/map'
+    | '/roads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/analytics' | '/complaints' | '/map' | '/roads' | '/'
+  to:
+    | '/login'
+    | '/analytics'
+    | '/complaints'
+    | '/future'
+    | '/map'
+    | '/roads'
+    | '/'
   id:
     | '__root__'
     | '/_authenticated'
     | '/login'
     | '/_authenticated/analytics'
     | '/_authenticated/complaints'
+    | '/_authenticated/future'
     | '/_authenticated/map'
     | '/_authenticated/roads'
     | '/_authenticated/'
@@ -136,6 +160,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMapRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/future': {
+      id: '/_authenticated/future'
+      path: '/future'
+      fullPath: '/future'
+      preLoaderRoute: typeof AuthenticatedFutureRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/complaints': {
       id: '/_authenticated/complaints'
       path: '/complaints'
@@ -156,6 +187,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteChildren {
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
   AuthenticatedComplaintsRoute: typeof AuthenticatedComplaintsRoute
+  AuthenticatedFutureRoute: typeof AuthenticatedFutureRoute
   AuthenticatedMapRoute: typeof AuthenticatedMapRoute
   AuthenticatedRoadsRoute: typeof AuthenticatedRoadsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
@@ -164,6 +196,7 @@ interface AuthenticatedRouteChildren {
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
   AuthenticatedComplaintsRoute: AuthenticatedComplaintsRoute,
+  AuthenticatedFutureRoute: AuthenticatedFutureRoute,
   AuthenticatedMapRoute: AuthenticatedMapRoute,
   AuthenticatedRoadsRoute: AuthenticatedRoadsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
