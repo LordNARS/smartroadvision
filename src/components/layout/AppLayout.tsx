@@ -10,6 +10,7 @@ import {
   LogOut,
   Search,
   Activity,
+  Navigation,
 } from "lucide-react";
 import { useAuth, useApp, priorityLevel } from "@/lib/store";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ import { Badge } from "@/components/ui/badge";
 const nav = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/roads", label: "Road Management", icon: RouteIcon, exact: false },
+  { to: "/routing", label: "Route Optimizer", icon: Navigation, exact: false },
   { to: "/complaints", label: "Complaints", icon: MessageSquareWarning, exact: false },
   { to: "/map", label: "City Map", icon: Map, exact: false },
   { to: "/analytics", label: "Analytics", icon: BarChart3, exact: false },
