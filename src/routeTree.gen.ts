@@ -15,6 +15,7 @@ import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedRoadsRouteImport } from './routes/_authenticated/roads'
 import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
 import { Route as AuthenticatedComplaintsRouteImport } from './routes/_authenticated/complaints'
+import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -45,16 +46,23 @@ const AuthenticatedComplaintsRoute = AuthenticatedComplaintsRouteImport.update({
   path: '/complaints',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
   '/complaints': typeof AuthenticatedComplaintsRoute
   '/map': typeof AuthenticatedMapRoute
   '/roads': typeof AuthenticatedRoadsRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
   '/complaints': typeof AuthenticatedComplaintsRoute
   '/map': typeof AuthenticatedMapRoute
   '/roads': typeof AuthenticatedRoadsRoute
@@ -64,6 +72,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
+  '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
   '/_authenticated/complaints': typeof AuthenticatedComplaintsRoute
   '/_authenticated/map': typeof AuthenticatedMapRoute
   '/_authenticated/roads': typeof AuthenticatedRoadsRoute
@@ -71,13 +80,14 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/complaints' | '/map' | '/roads'
+  fullPaths: '/' | '/login' | '/analytics' | '/complaints' | '/map' | '/roads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/complaints' | '/map' | '/roads' | '/'
+  to: '/login' | '/analytics' | '/complaints' | '/map' | '/roads' | '/'
   id:
     | '__root__'
     | '/_authenticated'
     | '/login'
+    | '/_authenticated/analytics'
     | '/_authenticated/complaints'
     | '/_authenticated/map'
     | '/_authenticated/roads'
@@ -133,10 +143,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedComplaintsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/analytics': {
+      id: '/_authenticated/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AuthenticatedAnalyticsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
   AuthenticatedComplaintsRoute: typeof AuthenticatedComplaintsRoute
   AuthenticatedMapRoute: typeof AuthenticatedMapRoute
   AuthenticatedRoadsRoute: typeof AuthenticatedRoadsRoute
@@ -144,6 +162,7 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
   AuthenticatedComplaintsRoute: AuthenticatedComplaintsRoute,
   AuthenticatedMapRoute: AuthenticatedMapRoute,
   AuthenticatedRoadsRoute: AuthenticatedRoadsRoute,
