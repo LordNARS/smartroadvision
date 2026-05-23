@@ -19,8 +19,8 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("admin@smartcity.gov");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e: React.FormEvent) => {
