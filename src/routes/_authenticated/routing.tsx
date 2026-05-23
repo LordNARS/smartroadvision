@@ -543,7 +543,6 @@ function RoutingPage() {
       </div>
   );
 }
-}
 
 function comfortToScore(c: ScoredRoute["comfort"]) {
   return c === "Excellent" ? 92 : c === "Good" ? 75 : c === "Fair" ? 55 : 32;
