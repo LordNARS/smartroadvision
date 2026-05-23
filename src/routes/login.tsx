@@ -19,8 +19,8 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("admin@smartcity.gov");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -79,11 +79,11 @@ function LoginPage() {
 
           <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
             <ShieldCheck className="h-3.5 w-3.5 text-success" />
-            End-to-end encrypted · ISO 27001 compliant
+            Authorized municipal personnel only
           </div>
         </div>
         <div className="mt-4 text-center text-xs text-muted-foreground">
-          Demo credentials prefilled · For authorized use only
+          Prototype build · Connect a backend for production auth
         </div>
       </div>
     </div>
