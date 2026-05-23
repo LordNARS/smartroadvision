@@ -79,11 +79,11 @@ function LoginPage() {
 
           <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
             <ShieldCheck className="h-3.5 w-3.5 text-success" />
-            End-to-end encrypted · ISO 27001 compliant
+            Authorized municipal personnel only
           </div>
         </div>
         <div className="mt-4 text-center text-xs text-muted-foreground">
-          Demo credentials prefilled · For authorized use only
+          Prototype build · Connect a backend for production auth
         </div>
       </div>
     </div>
