@@ -541,8 +541,8 @@ function RoutingPage() {
           </>
         )}
       </div>
-    </AppLayout>
   );
+}
 }
 
 function comfortToScore(c: ScoredRoute["comfort"]) {
