@@ -297,7 +297,6 @@ function RoutingPage() {
   const selectedRoute = results?.find((r) => r.profile === selected) ?? null;
 
   return (
-    <AppLayout>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -542,7 +541,6 @@ function RoutingPage() {
           </>
         )}
       </div>
-    </AppLayout>
   );
 }
 
